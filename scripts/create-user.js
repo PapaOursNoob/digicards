@@ -29,7 +29,7 @@ async function createUser() {
   });
 
   if (error) {
-    if (error.message.includes('already exists')) {
+    if (error.message.includes('already been registered') || error.message.includes('already exists')) {
       console.log('User already exists. Confirming email and updating password...');
       // Find user by email
       const { data: users } = await supabase.auth.admin.listUsers();
