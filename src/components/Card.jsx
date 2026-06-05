@@ -5,11 +5,11 @@ import { getRarityClass, getCardBorderColorClass } from '../utils/cardUtils';
 import { t } from '../i18n';
 
 const ZOOM_STYLES = {
-  1: { card: 'text-xs', img: 'min-h-[120px]', info: 'p-1.5', name: 'text-[10px]', meta: 'text-[9px]', badge: 'text-[8px] px-1 py-0.5', btn: 'p-0.5', btnIcon: 'h-3 w-3' },
-  2: { card: 'text-xs', img: 'min-h-[160px]', info: 'p-2', name: 'text-xs', meta: 'text-[10px]', badge: 'text-[9px] px-1 py-0.5', btn: 'p-0.5', btnIcon: 'h-3.5 w-3.5' },
-  3: { card: 'text-sm', img: 'min-h-[220px]', info: 'p-3', name: 'text-sm', meta: 'text-xs', badge: 'text-xs px-1.5 py-0.5', btn: 'p-1', btnIcon: 'h-4 w-4' },
-  4: { card: 'text-sm', img: 'min-h-[280px]', info: 'p-3', name: 'text-sm', meta: 'text-xs', badge: 'text-xs px-1.5 py-0.5', btn: 'p-1', btnIcon: 'h-4 w-4' },
-  5: { card: 'text-base', img: 'min-h-[340px]', info: 'p-4', name: 'text-base', meta: 'text-sm', badge: 'text-sm px-2 py-1', btn: 'p-1.5', btnIcon: 'h-5 w-5' },
+  1: { card: 'text-xs', img: 'min-h-[120px]', info: 'p-1.5', name: 'text-[10px]', meta: 'text-[9px]', badge: 'text-[8px] px-1 py-0.5', btn: 'p-1', btnIcon: 'h-4 w-4' },
+  2: { card: 'text-xs', img: 'min-h-[160px]', info: 'p-2', name: 'text-xs', meta: 'text-[10px]', badge: 'text-[9px] px-1 py-0.5', btn: 'p-1.5', btnIcon: 'h-5 w-5' },
+  3: { card: 'text-sm', img: 'min-h-[220px]', info: 'p-3', name: 'text-sm', meta: 'text-xs', badge: 'text-xs px-1.5 py-0.5', btn: 'p-1.5', btnIcon: 'h-6 w-6' },
+  4: { card: 'text-sm', img: 'min-h-[280px]', info: 'p-3', name: 'text-sm', meta: 'text-xs', badge: 'text-xs px-1.5 py-0.5', btn: 'p-1.5', btnIcon: 'h-6 w-6' },
+  5: { card: 'text-base', img: 'min-h-[340px]', info: 'p-4', name: 'text-base', meta: 'text-sm', badge: 'text-sm px-2 py-1', btn: 'p-2', btnIcon: 'h-7 w-7' },
 };
 
 const Card = memo(function Card({

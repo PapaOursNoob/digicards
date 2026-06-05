@@ -166,12 +166,12 @@ export default function CardModal({ card, isOpen, onClose, onAddToCollection, on
           </div>
 
           <div className="flex flex-wrap gap-3 mt-6">
-            <button onClick={handleAddToCollection} className="flex items-center px-4 py-2 bg-accent-primary text-bg-primary rounded-lg hover:opacity-90">
-              <PlusIcon className="h-5 w-5 mr-2" />
+            <button onClick={handleAddToCollection} className="flex items-center px-5 py-2.5 bg-accent-primary text-bg-primary rounded-lg hover:opacity-90">
+              <PlusIcon className="h-6 w-6 mr-2" />
               {t('addToCollection')}
             </button>
-            <button onClick={handleAddToWishlist} className="flex items-center px-4 py-2 bg-warning text-bg-primary rounded-lg hover:bg-amber-600">
-              <HeartIcon className="h-5 w-5 mr-2" />
+            <button onClick={handleAddToWishlist} className="flex items-center px-5 py-2.5 bg-warning text-bg-primary rounded-lg hover:bg-amber-600">
+              <HeartIcon className="h-6 w-6 mr-2" />
               {t('addToWishlist')}
             </button>
             {showDeckPicker ? (
