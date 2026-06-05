@@ -30,13 +30,16 @@ async function createUser() {
 
   if (error) {
     if (error.message.includes('already exists')) {
-      console.log('User already exists. Updating password...');
+      console.log('User already exists. Confirming email and updating password...');
       // Find user by email
       const { data: users } = await supabase.auth.admin.listUsers();
       const existing = users?.users?.find(u => u.email === email);
       if (existing) {
-        await supabase.auth.admin.updateUserById(existing.id, { password });
-        console.log('Password updated successfully.');
+        await supabase.auth.admin.updateUserById(existing.id, {
+          password,
+          email_confirm: true
+        });
+        console.log('Email confirmed and password updated successfully.');
       }
     } else {
       console.error('Error creating user:', error.message);
