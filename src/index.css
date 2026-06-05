@@ -1,0 +1,88 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Theme: Dark (default) — Anthracite ────────── */
+:root, [data-theme="dark"] {
+  --bg-primary: #1a1a1a;
+  --bg-card: #242424;
+  --bg-elevated: #2e2e2e;
+  --text-primary: #f0f0f0;
+  --text-secondary: #a0a0a0;
+  --border-color: #3a3a3a;
+  --glass-bg: rgba(36, 36, 36, 0.8);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --scrollbar-track: #1a1a1a;
+  --scrollbar-thumb: #2e2e2e;
+  --scrollbar-hover: #3a3a3a;
+  --input-bg: #242424;
+}
+
+/* ── Theme: Light — Pearl Gray ─────────────────── */
+[data-theme="light"] {
+  --bg-primary: #e8e8e8;
+  --bg-card: #f5f5f5;
+  --bg-elevated: #ffffff;
+  --text-primary: #1a1a1a;
+  --text-secondary: #666666;
+  --border-color: #d0d0d0;
+  --glass-bg: rgba(245, 245, 245, 0.8);
+  --glass-border: rgba(0, 0, 0, 0.08);
+  --scrollbar-track: #e8e8e8;
+  --scrollbar-thumb: #c0c0c0;
+  --scrollbar-hover: #a0a0a0;
+  --input-bg: #ffffff;
+}
+
+/* ── Accent Colors ─────────────────────────────── */
+[data-accent="gray"]   { --accent-primary: #f0f0f0; --accent-secondary: #c0c0c0; }
+[data-accent="blue"]   { --accent-primary: #3b82f6; --accent-secondary: #1d4ed8; }
+[data-accent="red"]    { --accent-primary: #ef4444; --accent-secondary: #dc2626; }
+[data-accent="green"]  { --accent-primary: #22c55e; --accent-secondary: #16a34a; }
+[data-accent="violet"] { --accent-primary: #8b5cf6; --accent-secondary: #7c3aed; }
+[data-accent="yellow"] { --accent-primary: #eab308; --accent-secondary: #ca8a04; }
+[data-accent="purple"] { --accent-primary: #a855f7; --accent-secondary: #9333ea; }
+
+/* Gray accent inverts with theme */
+[data-theme="light"] [data-accent="gray"] { --accent-primary: #1a1a1a; --accent-secondary: #333333; }
+
+/* ── Custom Scrollbar ──────────────────────────── */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--scrollbar-track); }
+::-webkit-scrollbar-thumb { background: var(--scrollbar-thumb); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--scrollbar-hover); }
+
+/* ── Glassmorphism ─────────────────────────────── */
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border);
+}
+
+/* ── Card hover effect ─────────────────────────── */
+.card-hover:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+/* ── Rarity badges ─────────────────────────────── */
+.rarity-c { background-color: #9ca3af; }
+.rarity-u { background-color: #22c55e; }
+.rarity-r { background-color: #3b82f6; }
+.rarity-sr { background-color: #8b5cf6; }
+.rarity-sec { background-color: #f59e0b; }
+.rarity-p { background-color: #ec4899; }
+
+/* ── Card colors ───────────────────────────────── */
+.color-red { border-top: 4px solid #ef4444; }
+.color-blue { border-top: 4px solid #3b82f6; }
+.color-yellow { border-top: 4px solid #eab308; }
+.color-green { border-top: 4px solid #22c55e; }
+.color-black { border-top: 4px solid #555555; }
+.color-purple { border-top: 4px solid #a855f7; }
+.color-white { border-top: 4px solid #e0e0e0; }
+.color-multi { border-top: 4px solid; border-image: linear-gradient(90deg, #ef4444, #3b82f6, #eab308) 1; }
+
+/* ── Force theme colors on remaining hardcoded Tailwind classes ── */
+[data-theme="light"] .bg-black { background-color: rgba(0, 0, 0, 0.4) !important; }

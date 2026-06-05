@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DigiCollection - Digimon Card Game Manager</title>
+    <script>
+      (function() {
+        try {
+          var raw = localStorage.getItem('digicollection-storage');
+          var s = raw ? JSON.parse(raw) : null;
+          var settings = s && s.state && s.state.settings;
+          document.documentElement.dataset.theme = (settings && settings.theme) || 'dark';
+          document.documentElement.dataset.accent = (settings && settings.accentColor) || 'gray';
+        } catch(e) {
+          document.documentElement.dataset.theme = 'dark';
+          document.documentElement.dataset.accent = 'gray';
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
