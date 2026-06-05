@@ -23,10 +23,19 @@ export default function Auth() {
     try {
       if (isLogin) {
         await signIn(email, password);
+        navigate('/');
       } else {
-        await signUp(email, password);
+        const data = await signUp(email, password);
+        if (data?.user?.identities?.length === 0) {
+          setError(t('emailInUse'));
+        } else if (!data?.session) {
+          setSuccess('Vérifie ton email pour confirmer ton compte avant de te connecter.');
+          setSubmitting(false);
+          return;
+        } else {
+          navigate('/');
+        }
       }
-      navigate('/');
     } catch (err) {
       if (err.message === 'User already registered') {
         setError(t('emailInUse'));
