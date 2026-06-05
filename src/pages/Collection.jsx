@@ -4,8 +4,7 @@ import {
   FolderIcon,
   ChartBarIcon,
   ArrowDownTrayIcon,
-  MagnifyingGlassIcon,
-  CameraIcon
+  MagnifyingGlassIcon
 } from '@heroicons/react/24/outline';
 import { useAuth } from '../contexts/AuthContext';
 import { useCollection, useWishlist, useAddToCollection, useRemoveFromCollection, useAddToWishlist, useRemoveFromWishlist } from '../hooks/useCards';
@@ -13,7 +12,6 @@ import { useCardsBySet } from '../hooks/useCards';
 import { useSets } from '../hooks/useSets';
 import Card from '../components/Card';
 import CardModal from '../components/CardModal';
-import CardScanner from '../components/CardScanner';
 import useStore from '../store/useStore.jsx';
 import { t } from '../i18n';
 
@@ -70,7 +68,6 @@ export default function Collection() {
   const [setsSortBy, setSetsSortBy] = useState('owned');
   const [selectedSet, setSelectedSet] = useState('');
   const [selectedCard, setSelectedCard] = useState(null);
-  const [isScannerOpen, setIsScannerOpen] = useState(false);
 
   const { data: collection = [], isLoading } = useCollection(user?.id);
   const { data: wishlist = [] } = useWishlist(user?.id);
@@ -172,34 +169,10 @@ export default function Collection() {
           setSelectedCard(null);
         }}
       />
-      <CardScanner
-        isOpen={isScannerOpen}
-        onClose={() => setIsScannerOpen(false)}
-        ownedCards={ownedNumbers}
-        onCardsConfirmed={(cards) => {
-          cards.forEach(card => {
-            addToCollection.mutate({
-              userId: user.id,
-              cardNumber: card.card_number,
-              qtyNormal: 1,
-              qtyFoil: 0,
-              condition: 'NM',
-              purchasePrice: null
-            });
-          });
-        }}
-      />
       <div className="p-4">
         <div className="flex justify-between items-center mb-6">
           <h1 className="text-3xl font-bold text-text-primary">{t('myCollection')}</h1>
           <div className="flex gap-2">
-            <button
-              onClick={() => setIsScannerOpen(true)}
-              className="flex items-center bg-bg-card text-text-primary px-4 py-2 rounded-lg border border-border-color hover:bg-bg-elevated transition-colors"
-            >
-              <CameraIcon className="h-5 w-5 mr-2" />
-              {t('scanCards')}
-            </button>
             <button className="flex items-center bg-accent-primary text-bg-primary px-4 py-2 rounded-lg hover:bg-accent-secondary">
               <ArrowDownTrayIcon className="h-5 w-5 mr-2" />
               {t('export')}

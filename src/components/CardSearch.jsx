@@ -3,13 +3,12 @@ import toast from 'react-hot-toast';
 import { useCards } from '../hooks/useCards';
 import Card from './Card';
 import CardModal from './CardModal';
-import CardScanner from './CardScanner';
 import { useAuth } from '../contexts/AuthContext';
 import { useCollection, useWishlist, useAddToCollection, useRemoveFromCollection, useAddToWishlist, useRemoveFromWishlist } from '../hooks/useCards';
 import { getRarityClass, naturalSort } from '../utils/cardUtils';
 import useStore from '../store/useStore.jsx';
 import { supabase } from '../lib/supabase';
-import { ChevronDownIcon, XMarkIcon, CameraIcon } from '@heroicons/react/24/outline';
+import { ChevronDownIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import { t } from '../i18n';
 
 const CardSearch = ({ initialSet = '' }) => {
@@ -26,7 +25,6 @@ const CardSearch = ({ initialSet = '' }) => {
   const setRef = useRef();
   const [selectedCard, setSelectedCard] = useState(null);
   const [showFilters, setShowFilters] = useState(false);
-  const [isScannerOpen, setIsScannerOpen] = useState(false);
   const settings = useStore(state => state.settings);
   const updateSettings = useStore(state => state.updateSettings);
   const hideWishlistOnOwned = settings.hideWishlistOnOwned || false;
@@ -170,24 +168,6 @@ const CardSearch = ({ initialSet = '' }) => {
           setSelectedCard(null);
         }}
       />
-      <CardScanner
-        isOpen={isScannerOpen}
-        onClose={() => setIsScannerOpen(false)}
-        ownedCards={ownedSet}
-        onCardsConfirmed={(cards) => {
-          cards.forEach(card => {
-            addToCollection.mutate({
-              userId: user.id,
-              cardNumber: card.card_number,
-              qtyNormal: 1,
-              qtyFoil: 0,
-              condition: 'NM',
-              purchasePrice: null
-            });
-          });
-        }}
-      />
-
       <div className="relative">
         <input
           type="text"
@@ -198,16 +178,6 @@ const CardSearch = ({ initialSet = '' }) => {
         />
         <button className="absolute right-3 top-1/2 transform -translate-y-1/2 text-text-secondary hover:text-text-primary" onClick={resetFilters}>
           {t('clear')}
-        </button>
-      </div>
-
-      <div className="flex gap-2">
-        <button
-          onClick={() => setIsScannerOpen(true)}
-          className="flex items-center gap-2 bg-bg-card text-text-primary px-4 py-3 rounded-lg border border-border-color hover:bg-bg-elevated transition-colors"
-        >
-          <CameraIcon className="h-5 w-5" />
-          {t('scanCards')}
         </button>
       </div>
 

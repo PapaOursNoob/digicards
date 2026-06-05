@@ -321,8 +321,6 @@
   "hideWishlistOnOwnedDesc": "The wishlist button no longer appears on cards you already own",
   "grayscaleNonOwned": "Non-owned cards in black & white",
   "grayscaleNonOwnedDesc": "Cards you don't own appear in grayscale",
-  "scanCards": "Scan cards",
-  "scanInstructions": "Take a photo or choose from gallery",
   "takePhoto": "Take photo",
   "chooseFromGallery": "Choose from gallery",
   "processing": "Processing...",
@@ -330,7 +328,5 @@
   "alreadyOwned": "Already owned",
   "newCard": "New",
   "noCardFound": "No cards detected in this image",
-  "scanAgain": "Scan again",
-  "addSelected": "Add selected",
-  "scanError": "Scan error"
+  "addSelected": "Add selected"
 }
