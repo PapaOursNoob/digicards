@@ -89,12 +89,24 @@ export const useCollection = (userId) => {
   return useQuery({
     queryKey: ['collection', userId],
     queryFn: async () => {
-      const { data, error } = await supabase
-        .from('collection')
-        .select('*, cards(*)')
-        .eq('user_id', userId);
-      if (error) throw new Error(error.message);
-      return data;
+      let allData = [];
+      let start = 0;
+      const pageSize = 1000;
+      const maxPages = 10;
+      for (let page = 0; page < maxPages; page++) {
+        const { data, error } = await supabase
+          .from('collection')
+          .select('*, cards(*)')
+          .eq('user_id', userId)
+          .order('card_number')
+          .range(start, start + pageSize - 1);
+        if (error) throw new Error(error.message);
+        if (!data || data.length === 0) break;
+        allData = allData.concat(data);
+        if (data.length < pageSize) break;
+        start += pageSize;
+      }
+      return allData;
     },
     enabled: !!userId,
   });
@@ -176,12 +188,24 @@ export const useWishlist = (userId) => {
   return useQuery({
     queryKey: ['wishlist', userId],
     queryFn: async () => {
-      const { data, error } = await supabase
-        .from('wishlist')
-        .select('*, cards(*)')
-        .eq('user_id', userId);
-      if (error) throw new Error(error.message);
-      return data;
+      let allData = [];
+      let start = 0;
+      const pageSize = 1000;
+      const maxPages = 10;
+      for (let page = 0; page < maxPages; page++) {
+        const { data, error } = await supabase
+          .from('wishlist')
+          .select('*, cards(*)')
+          .eq('user_id', userId)
+          .order('card_number')
+          .range(start, start + pageSize - 1);
+        if (error) throw new Error(error.message);
+        if (!data || data.length === 0) break;
+        allData = allData.concat(data);
+        if (data.length < pageSize) break;
+        start += pageSize;
+      }
+      return allData;
     },
     enabled: !!userId,
   });
