@@ -1,5 +1,6 @@
 import { useQuery, useQueryClient, useMutation } from '@tanstack/react-query';
 import { supabase } from '../lib/supabase';
+import toast from 'react-hot-toast';
 
 export const useCards = (filters = {}) => {
   return useQuery({
@@ -122,6 +123,9 @@ export const useAddToCollection = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['collection'] });
     },
+    onError: (err) => {
+      toast.error(err.message);
+    },
   });
 };
 
@@ -159,6 +163,9 @@ export const useRemoveFromCollection = () => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['collection'] });
+    },
+    onError: (err) => {
+      toast.error(err.message);
     },
   });
 };
@@ -201,6 +208,9 @@ export const useAddToWishlist = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['wishlist'] });
     },
+    onError: (err) => {
+      toast.error(err.message);
+    },
   });
 };
 
@@ -218,6 +228,9 @@ export const useRemoveFromWishlist = () => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['wishlist'] });
+    },
+    onError: (err) => {
+      toast.error(err.message);
     },
   });
 };

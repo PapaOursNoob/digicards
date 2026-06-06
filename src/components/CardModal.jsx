@@ -37,24 +37,26 @@ export default function CardModal({ card, isOpen, onClose, onAddToCollection, on
       condition,
       purchase_price: purchasePrice || null
     });
-    toast.success(`${card.name} ${t('addedToCollection')}`);
     onClose();
   };
 
   const handleAddToWishlist = () => {
     onAddToWishlist(card.card_number);
-    toast.success(`${card.name} ${t('addedToWishlist')}`);
     onClose();
   };
 
   const handleAddToDeck = async () => {
     if (!selectedDeckId || !user) return;
     const deck = userDecks?.find(d => d.id === selectedDeckId);
-    await addCardToDeck.mutateAsync({ deckId: selectedDeckId, cardNumber: card.card_number, quantity: 1 });
-    toast.success(`${card.name} ${t('addedTo')} ${deck?.name || ''}`);
-    setShowDeckPicker(false);
-    setSelectedDeckId('');
-    onClose();
+    try {
+      await addCardToDeck.mutateAsync({ deckId: selectedDeckId, cardNumber: card.card_number, quantity: 1 });
+      toast.success(`${card.name} ${t('addedTo')} ${deck?.name || ''}`);
+      setShowDeckPicker(false);
+      setSelectedDeckId('');
+      onClose();
+    } catch (err) {
+      toast.error(err.message);
+    }
   };
 
   return (
