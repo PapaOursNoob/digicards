@@ -13,6 +13,7 @@ import { useSets } from '../hooks/useSets';
 import Card from '../components/Card';
 import CardModal from '../components/CardModal';
 import useStore from '../store/useStore.jsx';
+import { naturalSort } from '../utils/cardUtils';
 import { t } from '../i18n';
 
 const SET_COLORS = {
@@ -45,7 +46,7 @@ function getBoosterImageUrl(setName) {
       '05': 'ver6', '06': 'ver7', '07': 'ver8', '08': 'ver9',
       '09': 'ver10', '10': 'ver11', '11': 'ver12', '12': 'ver13',
       '13': 'ver14', '14': 'ver15', '15': 'ver16', '16': 'ver17',
-      '17': 'ver18', '18': 'ver18-19', '19': 'ver19-20',
+      '17': 'ver18-19', '18': 'ver18-19', '19': 'ver19-20',
       '20': 'ver21', '21': 'ver22', '22': 'ver23', '23': 'ver24',
       '24': 'ver25', '25': 'ver26',
     };
@@ -58,11 +59,7 @@ function getBoosterImageUrl(setName) {
   }
 
   if (prefix === 'ST') {
-    return `https://world.digimoncard.com/images/products/pack/st-${rawNum}/img_pkg.png`;
-  }
-
-  if (prefix === 'LM') {
-    return `https://world.digimoncard.com/images/products/pack/lm-${rawNum}/img_pkg.png`;
+    return `https://world.digimoncard.com/images/products/deck/st-${rawNum}/img_pkg.png`;
   }
 
   return null;
@@ -106,7 +103,7 @@ export default function Collection() {
       const aOwned = ownedNumbers.has(a.card_number) ? 0 : 1;
       const bOwned = ownedNumbers.has(b.card_number) ? 0 : 1;
       if (aOwned !== bOwned) return aOwned - bOwned;
-      return (a.card_number || '').localeCompare(b.card_number || '');
+      return naturalSort(a.card_number || '', b.card_number || '');
     });
   }, [setCards, ownedNumbers]);
 
@@ -117,7 +114,7 @@ export default function Collection() {
           const aOwned = a.ownedCards > 0 ? 0 : 1;
           const bOwned = b.ownedCards > 0 ? 0 : 1;
           if (aOwned !== bOwned) return aOwned - bOwned;
-          return a.name.localeCompare(b.name);
+          return naturalSort(a.name, b.name);
         }
         if (setsSortBy === 'completion') {
           const aPct = a.totalCards > 0 ? a.ownedCards / a.totalCards : 0;
