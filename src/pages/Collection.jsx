@@ -37,6 +37,7 @@ function getBoosterImageUrl(setName) {
   if (!match) return null;
   const prefix = match[1].toUpperCase();
   const num = match[2].padStart(2, '0');
+  const rawNum = match[2];
 
   if (prefix === 'BT') {
     const btMap = {
@@ -44,7 +45,9 @@ function getBoosterImageUrl(setName) {
       '05': 'ver6', '06': 'ver7', '07': 'ver8', '08': 'ver9',
       '09': 'ver10', '10': 'ver11', '11': 'ver12', '12': 'ver13',
       '13': 'ver14', '14': 'ver15', '15': 'ver16', '16': 'ver17',
-      '18': 'ver18-19', '19': 'ver19-20',
+      '17': 'ver18', '18': 'ver18-19', '19': 'ver19-20',
+      '20': 'ver21', '21': 'ver22', '22': 'ver23', '23': 'ver24',
+      '24': 'ver25', '25': 'ver26',
     };
     const dir = btMap[num];
     if (dir) return `https://world.digimoncard.com/images/products/pack/${dir}/img_pkg.png`;
@@ -52,6 +55,14 @@ function getBoosterImageUrl(setName) {
 
   if (['EX', 'RB', 'AD'].includes(prefix)) {
     return `https://world.digimoncard.com/images/products/pack/${prefix.toLowerCase()}-${num}/img_pkg.png`;
+  }
+
+  if (prefix === 'ST') {
+    return `https://world.digimoncard.com/images/products/pack/st-${rawNum}/img_pkg.png`;
+  }
+
+  if (prefix === 'LM') {
+    return `https://world.digimoncard.com/images/products/pack/lm-${rawNum}/img_pkg.png`;
   }
 
   return null;
@@ -385,7 +396,7 @@ export default function Collection() {
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                 {[...Array(8)].map((_, i) => (
                   <div key={i} className="bg-bg-card rounded-xl border border-border-color animate-pulse">
-                    <div className="h-48 bg-bg-elevated rounded-t-xl" />
+                    <div className="h-32 bg-bg-elevated rounded-t-xl" />
                     <div className="p-4 space-y-3">
                       <div className="h-4 bg-bg-elevated rounded w-20" />
                       <div className="h-3 bg-bg-elevated rounded w-32" />
@@ -418,14 +429,14 @@ export default function Collection() {
                       className="bg-bg-card rounded-xl border border-border-color overflow-hidden cursor-pointer transform transition-transform hover:scale-105 hover:border-accent-primary"
                     >
                       <div
-                        className="relative h-48 flex items-center justify-center"
+                        className="relative h-32 flex items-center justify-center"
                         style={{ background: `linear-gradient(135deg, ${from}, ${to})` }}
                       >
                         {imgUrl ? (
                           <img
                             src={imgUrl}
                             alt={set.name}
-                            className="h-40 w-auto object-contain drop-shadow-lg"
+                            className="h-24 w-auto object-contain drop-shadow-lg"
                             onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }}
                           />
                         ) : null}
